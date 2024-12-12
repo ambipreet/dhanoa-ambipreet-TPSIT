@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>temporizzatore e media </title>
+    <style>
+        #container{
+            height: 200px;
+            width: 500px;
+            display: inline-block;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Lezione sul setInterval</h1>
+    <p> Il setInterval è un comando per
+        creare un temporizzatore cioè una chiamata ad una
+        funzione ogni n millisecondi
+    </p>
+ 
+    <button onclick="getTime()"> test sul click</button>
+
+    <div id="container">
+            <p id="out1"></p>
+    </div>
+
+
+    <button onclick="stampaArray()"> stampa array</button>
+
+            <p id="out2"></p>
+            <button onclick="calcolaMedia()"> Media</button>
+
+            <p id="out3"></p>
+<script>
+    let numeri=[];
+    const mioOutput=document.getElementById("out1");
+
+    const mioOutput2=document.getElementById("out2");
+
+    const mioOutput3=document.getElementById("out3");
+
+   setInterval(getTime,3000)
+
+  function getTime(){
+    let count;
+    
+ let x = Math.round((Math.random() * 90)+1);
+        count++;
+                        
+   mioOutput.innerHTML+=x
+
+   RiempiArrayConNumeri(x)
+
+            }  
+    function RiempiArrayConNumeri(numeridainserire){
+
+        numeri.push(numeridainserire);
+        calcolaMedia(x)
+    }
+      
+  function stampaArray(){
+
+    mioOutput2.innerHTML+=numeri;
+  }
+
+
+
+function calcolaMedia(x) {
+
+    let media;
+  somma =+ x;
+  media= somma / count;
+  mioOutput3.innerHTML+=media;
+
+}
+
+
+
+</script>
+
+</body>
+</html>
