@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array 1</title>
+
+<style>
+
+    #container{
+        height: 200px;
+        width: 500px;
+        display: inline-block;
+    }
+</style>
+
+
+</head>
+<body>
+
+    <h1>Array esercizio 1</h1>
+
+    <p>Lista elementi:</p>
+
+    <div id="container">
+    <p id="out1"></p>
+     </div>
+
+    <script>
+        //definizione di array   lista di elementi omogenei tra loro
+        // gli elementi possono essere char numeri o oggetti
+        // o addirittura strutture dati di oggetti
+
+        //gli array o vettori hanno un indice che va da 0 alla
+        // alla lunghezza del vettore    es. numeri.lenght
+        // gli elementi sono n    
+        // l'indice va da 0 a n-1
+
+        let numeri=[];
+        RiempiArrayConNumeri()
+        document.getElementById("out1").innerHTML=numeri;
+
+
+
+
+
+            function RiempiArrayConNumeri()
+            {
+                
+                for(let i=0;i<100;i++)
+                    {
+                        let x = Math.round((Math.random() * 100)+1);
+                        numeri[i]=x;
+                        
+
+                    }
+
+                   
+        }
+
+    </script>
+   
+</body>
+</html>
