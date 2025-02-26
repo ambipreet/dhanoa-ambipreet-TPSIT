@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prima Pagina con Form in HTML E BS5</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h2>PRIMA PAGINA CON FORM IN HTML E BS5</h2>
+    <form>
+      <div class="mb-1">
+        <label for="fname" class="form-label">Nome:</label>
+        <input type="text" id="fname" name="fname" class="form-control w-25" value="John">
+      </div>
+      
+      <div class="mb-1">
+        <label for="lname" class="form-label">Cognome:</label>
+        <input type="text" id="lname" name="lname" class="form-control w-25" value="Doe">
+      </div>
+      
+      <div class="form-check">
+        <input type="checkbox" id="privato" name="privato" value="Bike" class="form-check-input">
+        <label for="privato" class="form-check-label">PRIVATE</label>
+      </div>
+      
+      <div class="form-check">
+        <input type="checkbox" id="pubblico" name="pubblico" value="Car" class="form-check-input">
+        <label for="pubblico" class="form-check-label">PUBBLIC</label>
+      </div>
+      
+      <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
