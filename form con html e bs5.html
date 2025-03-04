@@ -10,15 +10,15 @@
 <body>
   <div class="container mt-5">
     <h2>PRIMA PAGINA CON FORM IN HTML E BS5</h2>
-    <form>
+    <form action="/action_page.php" method="get" target="_blank" >
       <div class="mb-1">
         <label for="fname" class="form-label">Nome:</label>
-        <input type="text" id="fname" name="fname" class="form-control w-25" value="John">
+          <input type="text" id="fname" name="fname"><br><br>
       </div>
       
       <div class="mb-1">
         <label for="lname" class="form-label">Cognome:</label>
-        <input type="text" id="lname" name="lname" class="form-control w-25" value="Doe">
+         <input type="text" id="lname" name="lname"><br><br>
       </div>
       
       <div class="form-check">
@@ -32,6 +32,7 @@
       </div>
       
       <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        <input type="submit" value="Submit">
     </form>
   </div>
 
