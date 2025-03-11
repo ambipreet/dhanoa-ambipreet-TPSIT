@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore di Frasi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #combinazioni {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Generatore di Frasi</h1>
+<p>scrivi soggetti ,verbi complementi staccati da una virgola</p>
+<form id="form">
+    <label for="soggetti">Soggetti:</label><br>
+    <input type="text" id="soggetti" placeholder="scrivi i soggetti staccati da una virgola" ><br><br>
+
+    <label for="verbi">Verbi:</label><br>
+    <input type="text" id="verbi" placeholder="scrivi i verbi staccati da una virgola " ><br><br>
+
+    <label for="complemento">Complementi :</label><br>
+    <input type="text" id="complemento" placeholder="scrivi i Complementi staccati da una virgola" ><br><br>
+
+    <button type="button" onclick="generaCombinazione()">Genera una frase</button>
+</form>
+
+<div id="combinazioni"></div>
+
+<script>
+    function generaCombinazione() {
+        // Ottieni i dati dal form
+        let soggetti = document.getElementById("soggetti").value.split(",").map(item => item.trim());
+        let verbi = document.getElementById("verbi").value.split(",").map(item => item.trim());
+        let complemento = document.getElementById("complemento").value.split(",").map(item => item.trim());
+
+        // Funzione per generare una combinazione casuale
+        function generaCombinazioneCasuale(soggetti, verbi, complemento) {
+            let soggetto = soggetti[Math.floor(Math.random() * soggetti.length)];
+            let verbo = verbi[Math.floor(Math.random() * verbi.length)];
+            let compl = complemento[Math.floor(Math.random() * complemento.length)];
+            return `${soggetto} ${verbo} ${compl}`;
+        }
+
+        // Genera una frase casuale
+        let fraseCasuale = generaCombinazioneCasuale(soggetti, verbi, complemento);
+
+        // Mostra la frase
+        let resultDiv = document.getElementById("combinazioni");
+        resultDiv.innerHTML = `<h2>Frase generata:</h2><p>${fraseCasuale}</p>`;
+    }
+</script>
+
+</body>
+</html>
