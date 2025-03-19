@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funzioni con Stringhe</title>
+</head>
+<body>
+    <h2>Inserisci due stringhe:</h2>
+
+    <form id="form">
+        <label for="stringaA">Stringa A:</label>
+        <input type="text" id="stringaA" name="stringaA" required><br><br>
+        
+        <label for="stringaB">Stringa B:</label>
+        <input type="text" id="stringaB" name="stringaB" required><br><br>
+        
+        <button type="submit">Invia</button>
+    </form>
+
+    <h3>Risultati:</h3>
+    <p id="LunghezzaA"></p>
+    <p id="LunghezzaB"></p>
+    <p id="ContrarioA"></p>
+    <p id="ContrarioB"></p>
+    <p id="Unione"></p>
+    <p id="Somma"></p>
+
+    <script>
+        
+        function calcolaLunghezza(stringa) {
+            return stringa.length;
+        }
+
+      
+        function invertiStringa(stringa) {
+            return stringa.split('').reverse().join('');
+        }
+
+        function unisciStringhe(stringaA, stringaB) {
+            return stringaA + stringaB;
+        }
+
+       
+        function sommaLunghezze(stringaA, stringaB) {
+            const lunghezzaA = stringaA.length;
+            const lunghezzaB = stringaB.length;
+
+            if (lunghezzaB > 20) {
+                return "Stringa B troppo lunga!";
+            } else {
+                return lunghezzaA + lunghezzaB;
+            }
+        }
+
+        
+        document.getElementById("form").addEventListener("submit", function(event) {
+            event.preventDefault(); 
+
+            const stringaA = document.getElementById("stringaA").value;
+            const stringaB = document.getElementById("stringaB").value;
+
+            document.getElementById("LunghezzaA").innerText = "Lunghezza Stringa A: " + calcolaLunghezza(stringaA);
+            document.getElementById("LunghezzaB").innerText = "Lunghezza Stringa B: " + calcolaLunghezza(stringaB);
+            document.getElementById("ContrarioA").innerText = "Contrario Stringa A: " + invertiStringa(stringaA);
+            document.getElementById("ContrarioB").innerText = "Contrario Stringa B: " + invertiStringa(stringaB);
+            document.getElementById("Unione").innerText = "Unione delle due stringhe: " + unisciStringhe(stringaA, stringaB);
+            document.getElementById("Somma").innerText = "Somma delle lunghezze: " + sommaLunghezze(stringaA, stringaB);
+        });
+    </script>
+</body>
+</html>
