@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcola Risultati</title>
+</head>
+<body>
+
+    <h1>Calcolo Risultati</h1>
+
+    <!-- Form per l'input dei numeri -->
+    
+    <!--form id="formCalcolo">
+        <label for="a">Numero 1 (a): </label>
+        <input type="number" id="a" required><br><br>
+
+        <label for="b">Numero 2 (b): </label>
+        <input type="number" id="b" required><br><br>
+
+        <label for="c">Numero 3 (c): </label>
+        <input type="number" id="c" ><br><br>
+
+        <label for="d">Numero 4 (d): </label>
+        <input type="number" id="d" ><br><br>
+
+        <button type="submit">Calcola</button-->
+       
+    </form>
+    <form id="formCalcolo">
+        <label for="a">Numero 1 </label><br>
+        <input type="text" id="a"><br>
+
+        <label for="b">Numero 2 </label><br>
+        <input type="text" id="b"><br>
+
+        <label for="c">Numero 3 </label><br>
+        <input type="text" id="c"><br>
+
+        <label for="d">Numero 4 </label><br>
+        <input type="text" id="d"><br>
+
+        <button type="submit">Calcola</button>
+      
+      </form> 
+    <!-- Sezione per visualizzare i risultati -->
+    <h2>Risultati</h2>
+    <p id="primoRisultato"></p>
+    <p id="secondoRisultato"></p>
+    <p>nel primo risultato effettuo una somma dei primi 2 poi moltiplicizazione degli altri 2 e infine una moltiplicazione tra i 2 risultati (n3*n4)*(n1+n2)</p>
+    <p>nel secondo risultato effettuo la radice quadrata del risultato del operazione precedente  </p>
+
+    <script>
+        // Funzione di calcolo
+        function calcolaRisultati(a, b, c, d) {
+            // Primo output: somma dei numeri elevata al quadrato
+            let primoRisultato = (a + b) * (c * d);
+
+            // Secondo output: la radice quadrata del primo risultato
+            let secondoRisultato = Math.sqrt(primoRisultato);
+
+            // Restituisco entrambi i risultati come un oggetto
+            return {
+                primoRisultato: primoRisultato,
+                secondoRisultato: secondoRisultato
+            };
+        }
+
+        // Gestione dell'evento di invio del modulo
+        document.getElementById("formCalcolo").addEventListener("submit", function(event) {
+            event.preventDefault();  // Evita il comportamento predefinito del form (reload della pagina)
+
+            // Otteniamo i valori inseriti dall'utente
+            let a = parseFloat(document.getElementById("a").value);
+            let b = parseFloat(document.getElementById("b").value);
+            let c = parseFloat(document.getElementById("c").value);
+            let d = parseFloat(document.getElementById("d").value);
+
+            // Calcoliamo i risultati
+            let risultati = calcolaRisultati(a, b, c, d);
+
+            // Visualizziamo i risultati
+            document.getElementById("primoRisultato").textContent = "Primo risultato: " + risultati.primoRisultato;
+            document.getElementById("secondoRisultato").textContent = "Secondo risultato: " + risultati.secondoRisultato;
+        });
+    </script>
+
+</body>
+</html>
