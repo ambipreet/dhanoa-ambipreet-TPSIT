@@ -52,11 +52,11 @@
                 somma += numeroRandom;  // Aggiungi il numero alla somma
                 count++;
 
-                // Ogni 50 numeri, calcola la media e resetta somma e count
+                // Chiamata alla funzione media per calcolare la media ogni 50 numeri
                 if (count === 50) {
-                    let media = somma / 50;  // Calcola la media dei 50 numeri
-                    numeri +="\n" + "Media: " + media.toFixed(2) + "\n";  // Aggiungi la media alla stringa
-                    mediaArray.push(media);  // Aggiungi la media all'array delle medie
+                    let mediaVal = somma / 50;  // Calcola la media dei 50 numeri
+                    numeri += "\n" + "Media: " + mediaVal.toFixed(2) + "\n";  // Aggiungi la media alla stringa
+                    mediaArray.push(mediaVal);  // Aggiungi la media all'array delle medie
                     // Reset somma e count per i successivi 50 numeri
                     somma = 0;
                     count = 0;
@@ -75,3 +75,4 @@
     </script>
 </body>
 </html>
+
