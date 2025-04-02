@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numeri Casuali</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #output {
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generatore di Numeri Casuali</h1>
+    <label for="min">Min:</label>
+    <input type="number" id="min" value="1">
+    <label for="max">Max:</label>
+    <input type="number" id="max" value="100">
+    <button onclick="generaNumeri()">Genera</button>
+    <div id="output"></div>
+   
+    <script>
+        function generaNumeri() {
+            const min = parseInt(document.getElementById('min').value, 10);
+            const max = parseInt(document.getElementById('max').value, 10);
+            if (isNaN(min) || isNaN(max) || min >= max) {
+                alert("Inserisci un intervallo valido.");
+                return;
+            }
+
+            let numeriArray = [];  // Array per contenere i numeri generati
+            let numeri = "";        // Stringa per visualizzare i numeri e le medie
+            let somma = 0;          // Somma dei numeri per calcolare la media
+            let mediaArray = [];    // Array per contenere le medie calcolate
+            let count = 0;          // Conta i numeri per ogni gruppo di 50 numeri
+
+            // Genera 10000 numeri casuali
+            for (let i = 0; i < 10000; i++) {
+                let numeroRandom = Math.random() * (max - min) + min;  // Numero reale casuale
+                numeriArray.push(numeroRandom);  // Aggiungi il numero all'array
+                numeri += numeroRandom.toFixed(2) + " ";  // Aggiungi il numero alla stringa (con 2 decimali)
+                somma += numeroRandom;  // Aggiungi il numero alla somma
+                count++;
+
+                // Ogni 50 numeri, calcola la media e resetta somma e count
+                if (count === 50) {
+                    let media = somma / 50;  // Calcola la media dei 50 numeri
+                    numeri +="\n" + "Media: " + media.toFixed(2) + "\n";  // Aggiungi la media alla stringa
+                    mediaArray.push(media);  // Aggiungi la media all'array delle medie
+                    // Reset somma e count per i successivi 50 numeri
+                    somma = 0;
+                    count = 0;
+                }
+
+                // Aggiungi una nuova riga ogni 50 numeri per migliorare la visualizzazione
+                if (i % 50 === 49) {
+                    numeri += "\n";
+                }
+            }
+
+            // Mostra il risultato nella pagina
+            document.getElementById('output').textContent = numeri;
+            console.log("Medie per ogni gruppo di 50 numeri:", mediaArray);  // Log delle medie nel console
+        }
+    </script>
+</body>
+</html>
