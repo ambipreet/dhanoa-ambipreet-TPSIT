@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore Numeri Casuali</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .panel {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        input {
+            padding: 5px;
+            margin: 0 5px;
+            width: 60px;
+        }
+        button {
+            padding: 5px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        #results div {
+            margin: 10px 0;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="panel">
+        <h2>Generatore Numeri Casuali</h2>
+        <div>
+            <label for="min">Min:</label>
+            <input type="number" id="min" value="0">
+            <label for="max">Max:</label>
+            <input type="number" id="max" value="1">
+            <button onclick="avviaGenerazione()">Genera</button>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h2>Risultati</h2>
+        <div id="results">
+            <div>Ultimo numero: <span id="mioOut1">-</span></div>
+            <div>Tutti i numeri: <span id="arrayOut">[]</span></div>
+            <div>Rapporti: <span id="arrayOutRapporti">[]</span></div>
+            <div>Media ultimi 50: <span id="media">-</span></div>
+            <div>Distanze dalla metà: <span id="distanzeOut">[]</span></div>
+        </div>
+    </div>
+
+    <script>
+        const mioArrayCasuali = [];
+        const ArrayRapporti = [];
+        const ArrayDistanze = [];
+        let rangeMid = 0.5;
+
+        function avviaGenerazione() {
+            const min = parseFloat(document.getElementById('min').value) || 0;
+            const max = parseFloat(document.getElementById('max').value) || 1;
+            
+            if (min >= max) {
+                alert("Il valore minimo deve essere inferiore al massimo");
+                return;
+            }
+
+            rangeMid = (min + max) / 2;
+            mioArrayCasuali.length = 0;
+            ArrayRapporti.length = 0;
+            ArrayDistanze.length = 0;
+
+            // Avvia la generazione ogni 500ms
+            setInterval(generaNumeroCasuale, 500);
+        }
+
+        function generaNumeroCasuale() {
+            const min = parseFloat(document.getElementById('min').value) || 0;
+            const max = parseFloat(document.getElementById('max').value) || 1;
+            const casuale = Math.random() * (max - min) + min;
+            
+            document.getElementById("mioOut1").textContent = casuale;
+            mioArrayCasuali.push(casuale);
+            document.getElementById("arrayOut").textContent = JSON.stringify(mioArrayCasuali);
+
+            const len = mioArrayCasuali.length;
+            if (len > 1) {
+                const n = mioArrayCasuali[len-1] / mioArrayCasuali[len-2];
+                ArrayRapporti.push(n);
+                document.getElementById("arrayOutRapporti").textContent = JSON.stringify(ArrayRapporti);
+            }
+
+            const distanza = Math.abs(casuale - rangeMid);
+            ArrayDistanze.push(distanza);
+            document.getElementById("distanzeOut").textContent = JSON.stringify(ArrayDistanze);
+
+            if (len % 50 === 0) {
+                const media = calcolaMediaUltimi50();
+                document.getElementById("media").textContent = media;
+            }
+        }
+
+        function calcolaMediaUltimi50() {
+            let somma = 0;
+            const start = mioArrayCasuali.length - 50;
+            for (let i = start; i < mioArrayCasuali.length; i++) {
+                somma += mioArrayCasuali[i];
+            }
+            return somma / 50;
+        }
+    </script>
+</body>
+</html>
