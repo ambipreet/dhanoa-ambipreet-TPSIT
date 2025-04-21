@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Analisi Numero Casuale</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 40px;
+      color: #333;
+      text-align: center;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: inline-block;
+    }
+
+    h1 {
+      color: #007acc;
+    }
+
+    .output {
+      font-size: 18px;
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Analisi di un numero casuale</h1>
+    <div class="output" id="output">Generazione in corso...</div>
+  </div>
+
+  <script>
+    function isPrime(n) {
+      if (n <= 1) return false;
+      for (let i = 2; i <= Math.sqrt(n); i++) {
+        if (n % i === 0) return false;
+      }
+      return true;
+    }
+
+    function generaNumero() {
+      const numero = Math.floor(Math.random() * 1000) + 1;
+
+      const pariDispari = (numero % 2 === 0) ? "pari" : "dispari";
+      const primo = isPrime(numero) ? "sì" : "no";
+      const doppio = numero * 2;
+      const meta = Math.floor(numero / 2);
+      const complemento = 1000 - numero;
+      const somma = numero - 1 + numero + numero + 1;
+      const moltiplicato = (numero * 3.14).toFixed(2);
+
+      document.getElementById("output").innerHTML = `
+        <strong>Numero generato:</strong> ${numero}<br>
+        - È ${pariDispari}<br>
+        - È primo? ${primo}<br>
+        - Doppio: ${doppio}<br>
+        - Metà (intera): ${meta}<br>
+        - Complemento (1000 - n): ${complemento}<br>
+        - Somma con precedente e successivo: ${somma}<br>
+        - Moltiplicato per 3.14: ${moltiplicato}
+      `;
+    }
+
+    // Genera subito e poi ogni 5 secondi
+    generaNumero();
+    setInterval(generaNumero, 5000);
+  </script>
+
+</body>
+</html>
