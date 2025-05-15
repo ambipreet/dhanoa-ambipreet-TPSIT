@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Gioco Tempo di Reazione</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .number {
+      display: inline-block;
+      margin: 20px;
+      font-size: 40px;
+      color: black;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Gioco del Tempo di Reazione</h1>
+<div id="container"></div>
+<p id="status"></p>
+
+<!-- Bottoni -->
+<button id="mostraTempi">Mostra Tempi di Reazione</button>
+<button id="scaricaJSON">Scarica JSON</button>
+
+<!-- Visualizzazione -->
+<pre id="listaTempi"></pre>
+
+<script>
+  const container = document.getElementById("container");
+  const statusText = document.getElementById("status");
+
+  const tempiReazione = [];
+  let intervallo = 10000;
+  let maxNumeri = 6;
+  let indexRosso = null;
+  let tempoCambio = null;
+  let timer = null;
+
+  function creaNumeri() {
+    container.innerHTML = "";
+    for (let i = 0; i < maxNumeri; i++) {
+      const num = document.createElement("div");
+      num.classList.add("number");
+      num.textContent = Math.floor(Math.random() * 100);
+      num.dataset.index = i;
+      container.appendChild(num);
+    }
+  }
+
+  function cambiaColore() {
+    resetColori();
+    indexRosso = Math.floor(Math.random() * maxNumeri);
+    const numero = container.children[indexRosso];
+    numero.style.color = "red";
+    tempoCambio = Date.now();
+  }
+
+  function resetColori() {
+    for (let child of container.children) {
+      child.style.color = "black";
+    }
+  }
+
+  container.addEventListener("click", function(e) {
+    if (e.target.classList.contains("number")) {
+      const cliccato = parseInt(e.target.dataset.index);
+
+      if (cliccato === indexRosso && tempoCambio) {
+        const tempoReazione = Date.now() - tempoCambio;
+        tempiReazione.push(tempoReazione);
+        statusText.textContent = `Tempo: ${tempoReazione} ms | Tentativi: ${tempiReazione.length}`;
+        clearInterval(timer);
+        intervallo = Math.max(1000, intervallo - 1000);
+        resetColori();
+        startGame();
+      }
+    }
+  });
+
+  function startGame() {
+    creaNumeri();
+    cambiaColore();
+    timer = setInterval(() => {
+      cambiaColore();
+    }, intervallo);
+  }
+
+  startGame();
+
+  // Mostra tempi
+  const btnMostra = document.getElementById("mostraTempi");
+  const listaTempi = document.getElementById("listaTempi");
+
+  btnMostra.addEventListener("click", () => {
+    if (tempiReazione.length === 0) {
+      listaTempi.textContent = "Nessun tempo registrato ancora.";
+    } else {
+      listaTempi.textContent = "Tempi di reazione (ms):\n" + tempiReazione.join(", ");
+    }
+  });
+
+  // Scarica JSON
+  const btnScarica = document.getElementById("scaricaJSON");
+
+  btnScarica.addEventListener("click", () => {
+    if (tempiReazione.length === 0) {
+      alert("Nessun tempo registrato ancora.");
+      return;
+    }
+
+    // 1. Creazione dell'oggetto JSON
+    const dati = {
+      data: new Date().toLocaleString(),
+      numeroTentativi: tempiReazione.length,
+      tempi: tempiReazione
+    };
+
+    // 2. Converti l'oggetto in stringa JSON
+    const jsonString = JSON.stringify(dati, null, 2);
+
+    // 3. Crea un blob (file virtuale)
+    const blob = new Blob([jsonString], { type: "application/json" });
+
+    // 4. Crea un link per scaricare il file
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "tempi_di_reazione.json";
+    link.click();
+  });
+</script>
+
+</body>
+</html>
